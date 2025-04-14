@@ -3,6 +3,7 @@
     <!-- Price Input -->
     <v-text-field
       v-model="product.price"
+      data-testid="price"
       label="Price"
       type="number"
       min="0.01"

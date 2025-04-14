@@ -4,6 +4,7 @@
     <div class="v-select-container">
       <v-select
         id="product-category"
+        data-testid="category-select"
         v-model="product.category"
         label="Product Category"
         :items="categories"

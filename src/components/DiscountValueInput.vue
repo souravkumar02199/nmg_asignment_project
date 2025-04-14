@@ -2,6 +2,7 @@
     <v-container> 
         <v-text-field
         label="Discount Value"
+        data-testid="discount-value"
         v-model="product.discountValue"
         :rules="[v => (v !== null && v >= 0) || 'Discount value must be greater than or equal to 0']"
         v-if="product.discountType !== 'No Discount'"

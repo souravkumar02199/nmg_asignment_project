@@ -3,6 +3,7 @@
     <!-- Discount Type Selection -->
     <v-radio-group
       v-model="product.discountType"
+      data-testid="discountType-select"
       label="Discount Type"
       required
     >

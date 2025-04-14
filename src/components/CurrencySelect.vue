@@ -3,6 +3,7 @@
         <v-select
         label="Currency"
         v-model="product.currency"
+        data-testid="currency-select"
         :items="currencies"
         :rules="[v => !!v || 'Currency is required']"
         required

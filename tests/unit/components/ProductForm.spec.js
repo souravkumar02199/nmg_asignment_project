@@ -40,6 +40,7 @@ vi.mock('@/store/productStore', () => ({
       tags: [],
       seoKeywords: '',
     },
+    currencies: ['USD', 'EUR', 'INR', 'JPY'],
     categories: [
       'Electronics',
       'Clothing',
@@ -65,52 +66,50 @@ vi.mock('@/store/productStore', () => ({
 }));
 
 describe('ProductForm.vue', () => {
-  it('should render the form and submit button', async () => {
+  it('should show custom category input when "Other" is selected', async () => {
     render(ProductForm);
-
-    // Wait for the necessary elements to be rendered
-    // await waitFor(() => screen.getByLabelText('Product Name'));
-    // await waitFor(() => screen.getByLabelText('Product Category'));
-    // await waitFor(() => screen.getByText('Submit Product'));
-
-    // Check if the necessary elements are rendered
-    // expect(screen.getByLabelText('Product Name')).toBeInTheDocument();
-    // expect(screen.getByLabelText('Product Category')).toBeInTheDocument();
-    // expect(screen.getByText('Submit Product')).toBeInTheDocument();
+  
+    const categorySelect =  screen.getByTestId('category-select');
+    await fireEvent.update(categorySelect, 'Other');
+  
   });
 
-  it('should disable submit button if required fields are missing', async () => {
+  it('renders currency select dropdown', async () => {
+    render(ProductForm);
+    const currencySelect = screen.getByTestId('currency-select');
+    expect(currencySelect).to.exist;
+  });
+
+  it('renders discount select dropdown', async () => {
+    render(ProductForm);
+    const discountType = screen.getByTestId('discountType-select');
+    expect(discountType).to.exist;
+  });
+
+
+  it('renders publication-status dropdown', async () => {
     render(ProductForm);
 
-    // Initially, the form should be invalid and the submit button should be disabled
-    // const submitButton = screen.getByRole('button', { name: /Submit Product/i });
-    // expect(submitButton).toBeDisabled();
-
-    // Fill in some required fields
-    // const productNameInput = screen.getByLabelText('Product Name');
-    // await fireEvent.update(productNameInput, 'Test Product');
-
-    // Check if the submit button is still disabled because not all required fields are filled
-    // expect(submitButton).toBeDisabled();
+    const publicationStatus = screen.getByTestId('publication-status');
+    expect(publicationStatus).to.exist;
   });
 
   it('should enable submit button when all required fields are filled', async () => {
     render(ProductForm);
+
+    const productNameInput = screen.getByTestId('product-name');
+    const categorySelect = screen.getByTestId('category-select');
+    const priceInput = screen.getByTestId('price');
+    const currencySelect = screen.getByTestId('currency-select');
+    const submitButton = screen.getByText(/submit product/i);;
+
+    await fireEvent.update(productNameInput, 'Test Product');
+    await fireEvent.update(categorySelect, 'Electronics');
+    await fireEvent.update(priceInput, '100');
+    await fireEvent.update(currencySelect, 'USD');
   });
 
-  it('should submit the form with valid data', async () => {
+  it('should enable submit button when all required fields are filled', async () => {
     render(ProductForm);
-
-    // Spy on console.log to check the form submission
-    const consoleLogSpy = vi.spyOn(console, 'log');
-
-});
-
-  it('should show the available subcategories based on selected category', async () => {
-    render(ProductForm);
-
-    // Log the DOM to see the structure and verify if the select is present
-    console.log(screen.debug()); // This will log the current DOM structure
-
   });
 });

@@ -4,6 +4,7 @@
     <v-text-field
       v-model="product.name"
       label="Product Name"
+      data-testid="product-name"
       placeholder="Enter product name"
       required
       :rules="[value => !!value || 'Product Name is required']"

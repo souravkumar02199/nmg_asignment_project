@@ -3,6 +3,7 @@
     <!-- Publication Status Radio Group -->
     <v-radio-group
       v-model="product.publicationStatus"
+      data-testid="publication-status"
       label="Publication Status"
       row
     >
